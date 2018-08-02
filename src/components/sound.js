@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import '../styles/sound.scss'
+import '../styles/sound.scss';
 
 export default function Sound({ addFavorite, collection, isFavorite, name, queue, title }) {
   return (
@@ -11,13 +12,13 @@ export default function Sound({ addFavorite, collection, isFavorite, name, queue
         <i
           className="sound__action sound__action--favorite fa fa-star"
           onClick={event => {
-            event.stopPropagation()
-            addFavorite(collection, name)
+            event.stopPropagation();
+            addFavorite(collection, name);
           }}
         />
       }
     </button>
-  )
+  );
 }
 
 Sound.propTypes = {
@@ -27,4 +28,4 @@ Sound.propTypes = {
   name: PropTypes.string.isRequired,
   queue: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired
-}
+};

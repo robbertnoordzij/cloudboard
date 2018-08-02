@@ -1,12 +1,12 @@
-import { mapReducers } from 'redux-map-reducers'
-import { LOCATION_CHANGE } from '../constants'
+import { mapReducers } from 'redux-map-reducers';
+import { SET_BOARD } from '../constants';
 
 const reducerMap = {
-  [LOCATION_CHANGE]: determineBoard
+  [SET_BOARD]: setBoard
+};
+
+function setBoard(state, { board }) {
+  return board;
 }
 
-function determineBoard(state, { payload }) {
-  return payload.pathname.slice(1, payload.pathname.length) || null
-}
-
-export default mapReducers(reducerMap, null)
+export default mapReducers(reducerMap, '');

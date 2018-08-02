@@ -1,6 +1,6 @@
-import { CHANGE_BOARD } from '../constants'
+import { SET_BOARD } from '../constants';
 
-export const changeBoard = board => ({
-  type: CHANGE_BOARD,
+export const setBoard = board => ({
+  type: SET_BOARD,
   board
-})
+});

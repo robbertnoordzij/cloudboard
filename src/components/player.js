@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import '../styles/player.scss'
+import '../styles/player.scss';
 
 export default function Player({ playing }) {
-  const icon = playing ? 'volume-up' : 'volume-off'
+  const icon = playing ? 'volume-up' : 'volume-off';
 
   return (
     <div className="player">
@@ -20,14 +21,14 @@ export default function Player({ playing }) {
                   {' - ' + (playing.collection || 'Unknown collection')}
                 </span>
               </span>
-            )
+            );
           }
 
-          return <span className="player__secondary">Much quiet in here!</span>
+          return <span className="player__secondary">Much quiet in here!</span>;
         })()}
       </p>
     </div>
-  )
+  );
 }
 
 Player.propTypes = {
@@ -35,4 +36,4 @@ Player.propTypes = {
     sound: PropTypes.string,
     collection: PropTypes.string
   })
-}
+};

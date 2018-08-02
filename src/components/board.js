@@ -1,20 +1,21 @@
-import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { queue as queueAction } from '../actions/sound-actions'
-import { toggleCollection as toggleCollectionAction } from '../actions/collection-actions'
-import { addFavorite as addFavoriteAction, removeFavorite as removeFavoriteAction } from '../actions/favorites-actions'
-import Collection from './collection'
-import Player from './player'
-import Favorites from './favorites'
-import { throttleAction } from '../helpers/actions'
-import { getPlayingSound, markFavoriteSounds } from '../helpers/collections'
-import { enhanceFavorites } from '../helpers/favorites'
-import { SOUND_THROTTLE } from '../constants'
-import BoardTopMessage from './board-top-message'
+import { queue as queueAction } from '../actions/sound-actions';
+import { toggleCollection as toggleCollectionAction } from '../actions/collection-actions';
+import { addFavorite as addFavoriteAction, removeFavorite as removeFavoriteAction } from '../actions/favorites-actions';
+import Collection from './collection';
+import Player from './player';
+import Favorites from './favorites';
+import { throttleAction } from '../helpers/actions';
+import { getPlayingSound, markFavoriteSounds } from '../helpers/collections';
+import { enhanceFavorites } from '../helpers/favorites';
+import { SOUND_THROTTLE } from '../constants';
+import BoardTopMessage from './board-top-message';
 
-import '../styles/board.scss'
+import '../styles/board.scss';
 
 function Board({
   addFavorite,
@@ -28,9 +29,9 @@ function Board({
   removeFavorite,
   toggleCollection
 }) {
-  const localMode = location.pathname.indexOf('/local') === 0
-  const hasTopMessage = remoteMode || localMode
-  const hasPlayer = !(remoteMode && !localMode)
+  const localMode = location.pathname.indexOf('/local') === 0;
+  const hasTopMessage = remoteMode || localMode;
+  const hasPlayer = !(remoteMode && !localMode);
 
   return (
     <div className={remoteMode ? 'board--has-top-message' : ''}>
@@ -52,7 +53,7 @@ function Board({
         )}
       </div>
     </div>
-  )
+  );
 }
 
 function mapStateToProps({ queue, sounds, collections, favorites, remoteMode, isMobileBrowser }) {
@@ -62,7 +63,7 @@ function mapStateToProps({ queue, sounds, collections, favorites, remoteMode, is
     remoteMode,
     favorites: enhanceFavorites(favorites, sounds),
     isMobileBrowser
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -71,7 +72,7 @@ function mapDispatchToProps(dispatch) {
     toggleCollection: toggleCollectionAction,
     addFavorite: addFavoriteAction,
     removeFavorite: removeFavoriteAction
-  }, dispatch)
+  }, dispatch);
 }
 
 Board.propTypes = {
@@ -93,6 +94,6 @@ Board.propTypes = {
   remoteMode: PropTypes.bool.isRequired,
   removeFavorite: PropTypes.func.isRequired,
   toggleCollection: PropTypes.func.isRequired
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Board)
+export default connect(mapStateToProps, mapDispatchToProps)(Board);

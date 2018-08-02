@@ -1,30 +1,31 @@
 /* global ga */
 
-import shortid from 'shortid'
-import { Observable } from 'rxjs/Observable'
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/filter'
-import 'rxjs/add/operator/do'
-import 'rxjs/add/operator/merge'
+import shortid from 'shortid';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/merge';
 
-import { QUEUE, SOUND_THROTTLE } from '../constants'
-import { SERVER_PLAY } from '../../server/constants'
-import { play } from '../actions/sound-actions'
-import { serverQueue } from '../../server/events'
-import { isInLocalMode } from '../selectors'
-import socket from '../socket'
+import { QUEUE, SOUND_THROTTLE } from '../constants';
+import { SERVER_PLAY } from '../../server/constants';
+import { play } from '../actions/sound-actions';
+import { serverQueue } from '../../server/events';
+import { isInLocalMode } from '../selectors';
+import { hasLocalStorage } from '../helpers/browser';
+import socket from '../socket';
 
 export default function queueEpic(action$, { getState }) {
   const serverAction$ = serverSource()
     .filter(event => event.board === getState().board || event.admin)
-    .map(({ id, collection, sound }) => play(id, collection, sound))
+    .map(({ id, collection, sound }) => play(id, collection, sound));
 
   return action$
     .filter(action => action.type === QUEUE)
     .throttleTime(SOUND_THROTTLE)
     .do(action => {
-      const label = action.collection + ':' + action.sound
-      ga('send', 'event', 'Soundboard', 'play', label)
+      const label = action.collection + ':' + action.sound;
+      ga('send', 'event', 'Soundboard', 'play', label);
     })
     .map(action => ({
       action,
@@ -33,33 +34,33 @@ export default function queueEpic(action$, { getState }) {
     }))
     .do(({ action, id, localMode }) => {
       if (!localMode) {
-        broadcastSound(getState(), action, id)
+        broadcastSound(getState(), action, id);
       }
     })
     .filter(({ localMode }) => localMode)
     .map(({ action, id }) => {
-      const { collection, sound } = action
-      return play(id, collection, sound)
+      const { collection, sound } = action;
+      return play(id, collection, sound);
     })
-    .merge(serverAction$)
+    .merge(serverAction$);
 }
 
 function broadcastSound({ board }, action, id) {
-  const { collection, sound } = action
-  const adminToken = Modernizr.localstorage && localStorage.getItem('adminToken')
-  const { event, data } = serverQueue(id, board, collection, sound)
+  const { collection, sound } = action;
+  const adminToken = hasLocalStorage() && localStorage.getItem('adminToken');
+  const { event, data } = serverQueue(id, board, collection, sound);
 
   if (adminToken) {
-    data.adminToken = adminToken
+    data.adminToken = adminToken;
   }
 
-  socket.emit(event, data)
+  socket.emit(event, data);
 }
 
 function serverSource() {
   return Observable.create(observer => {
     socket.on(SERVER_PLAY, event => {
-      observer.next(event)
-    })
-  })
+      observer.next(event);
+    });
+  });
 }

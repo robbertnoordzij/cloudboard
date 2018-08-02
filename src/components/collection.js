@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react'
-import Sound from './sound'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Sound from './sound';
 
-import '../styles/collection.scss'
+import '../styles/collection.scss';
 
 export default function Collection({ addFavorite, collapsed, name, queue, sounds, title, toggleCollection }) {
   return (
@@ -22,7 +23,7 @@ export default function Collection({ addFavorite, collapsed, name, queue, sounds
         />
       )}
     </div>
-  )
+  );
 }
 
 Collection.propTypes = {
@@ -36,4 +37,4 @@ Collection.propTypes = {
   })).isRequired,
   title: PropTypes.string.isRequired,
   toggleCollection: PropTypes.func.isRequired
-}
+};

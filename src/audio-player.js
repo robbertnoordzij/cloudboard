@@ -1,19 +1,19 @@
-const SOUND_TIMEOUT = 13000
+const SOUND_TIMEOUT = 13000;
 
 export default function playAudio(url, onEnded) {
-  let ended = false
-  const audio = new Audio(url)
+  let ended = false;
+  const audio = new Audio(url);
 
   audio.onended = () => {
-    onEnded()
-    ended = true
-  }
+    onEnded();
+    ended = true;
+  };
 
   setTimeout(() => {
     if (!ended) {
-      onEnded()
+      onEnded();
     }
-  }, SOUND_TIMEOUT)
+  }, SOUND_TIMEOUT);
 
-  audio.play()
+  audio.play();
 }

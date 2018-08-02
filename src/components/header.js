@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import '../styles/header.scss'
+import '../styles/header.scss';
 
 export default function Header({ board }) {
   return (
@@ -15,9 +16,9 @@ export default function Header({ board }) {
         </span>
       }
     </div>
-  )
+  );
 }
 
 Header.propTypes = {
   board: PropTypes.string.isRequired
-}
+};

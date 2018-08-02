@@ -1,11 +1,11 @@
-import { ADD_FAVORITE, REMOVE_FAVORITE } from '../constants'
+import { ADD_FAVORITE, REMOVE_FAVORITE } from '../constants';
 
 export function addFavorite(collection, sound) {
   return {
     type: ADD_FAVORITE,
     collection,
     sound
-  }
+  };
 }
 
 export function removeFavorite(collection, sound) {
@@ -13,5 +13,5 @@ export function removeFavorite(collection, sound) {
     type: REMOVE_FAVORITE,
     collection,
     sound
-  }
+  };
 }

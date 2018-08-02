@@ -1,23 +1,11 @@
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const { version } = require('./package.json')
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { version } = require('./package.json');
 
-const env = process.env.NODE_ENV
+const env = process.env.NODE_ENV;
 const config = {
-  entry: {
-    app: './src/main.js',
-    vendor: [
-      'react',
-      'react-dom',
-      'react-redux',
-      'react-router',
-      'react-router-redux',
-      'redux',
-      'redux-map-reducers',
-      'shortid'
-    ]
-  },
+  entry: './src/main.js',
   output: {
     path: 'public',
     publicPath: '/public',
@@ -43,12 +31,6 @@ const config = {
       }
     ]
   },
-  resolve: {
-    alias: {
-      react: 'inferno-compat',
-      'react-dom': 'inferno-compat'
-    }
-  },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Cloudboard',
@@ -62,18 +44,17 @@ const config = {
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new ExtractTextPlugin('style.css'),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(env)
       }
     })
   ]
-}
+};
 
 if (env === 'development') {
-  config.devtool = 'source-map'
-  config.watch = true
+  config.devtool = 'source-map';
+  config.watch = true;
 }
 
 if (env === 'production') {
@@ -84,7 +65,7 @@ if (env === 'production') {
         warnings: false
       }
     })
-  )
+  );
 }
 
-module.exports = config
+module.exports = config;

@@ -1,13 +1,13 @@
-import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import Header from './header'
-import { version } from '../../package.json'
+import Header from './header';
+import { version } from '../../package.json';
 
-import '../styles/cloudboard.scss'
+import '../styles/cloudboard.scss';
 
-function Cloudboard({ children, location, remoteMode }) {
-  const board = location.pathname.slice('/board/'.length, location.pathname.length)
+function Cloudboard({ children, remoteMode, board }) {
   return (
     <div className={'cloudboard' + (remoteMode ? ' cloudboard--no-player' : '')}>
       <Header board={board}/>
@@ -25,14 +25,16 @@ function Cloudboard({ children, location, remoteMode }) {
         {'\u00A0'}2017 - version {version}
       </p>
     </div>
-  )
+  );
 }
 
 Cloudboard.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired
-  }).isRequired,
-  remoteMode: PropTypes.bool.isRequired
-}
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  remoteMode: PropTypes.bool.isRequired,
+  board: PropTypes.string.isRequired
+};
 
-export default connect(({ remoteMode }) => ({ remoteMode }))(Cloudboard)
+export default connect(({ remoteMode, board }) => ({ remoteMode, board }))(Cloudboard);

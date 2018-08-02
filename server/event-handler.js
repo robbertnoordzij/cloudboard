@@ -1,29 +1,29 @@
-const path = require('path')
-const fs = require('fs')
-const { serverPlay } = require('./events')
-const { SERVER_QUEUE } = require('./constants')
+const path = require('path');
+const fs = require('fs');
+const { serverPlay } = require('./events');
+const { SERVER_QUEUE } = require('./constants');
 
-let adminToken = null
+let adminToken = null;
 
 try {
-  adminToken = fs.readFileSync(path.join(__dirname, '../ADMIN_TOKEN'), 'utf-8')
+  adminToken = fs.readFileSync(path.join(__dirname, '../ADMIN_TOKEN'), 'utf-8');
 } catch (e) {
   // Do nothing
 }
 
 function eventHandler(socket) {
-  socket.on(SERVER_QUEUE, onQueue)
+  socket.on(SERVER_QUEUE, onQueue);
 
   function onQueue({ id, board, collection, sound, adminToken: possibleAdminToken }) {
-    const { event, data } = serverPlay(id, board, collection, sound)
+    const { event, data } = serverPlay(id, board, collection, sound);
 
     if (possibleAdminToken && possibleAdminToken === adminToken) {
-      data.admin = true
+      data.admin = true;
     }
 
-    socket.broadcast.emit(event, data)
-    socket.emit(event, data)
+    socket.broadcast.emit(event, data);
+    socket.emit(event, data);
   }
 }
 
-module.exports = eventHandler
+module.exports = eventHandler;

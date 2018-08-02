@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react'
-import Favorite from './favorite'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Favorite from './favorite';
 
-import '../styles/collection.scss'
+import '../styles/collection.scss';
 
 export default function Favorites({ queue, favorites, removeFavorite }) {
   return (
@@ -24,7 +25,7 @@ export default function Favorites({ queue, favorites, removeFavorite }) {
         />
       )}
     </div>
-  )
+  );
 }
 
 Favorites.propTypes = {
@@ -35,4 +36,4 @@ Favorites.propTypes = {
   })).isRequired,
   queue: PropTypes.func.isRequired,
   removeFavorite: PropTypes.func.isRequired
-}
+};

@@ -1,25 +1,24 @@
-export const QUEUE = 'QUEUE'
-export const PLAY = 'PLAY'
-export const STOPPED = 'STOPPED'
-export const TOGGLE_COLLECTION = 'TOGGLE_COLLECTION'
-export const TOGGLE_LOCAL_MODE = 'TOGGLE_LOCAL_MODE'
-export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE'
-export const ADD_FAVORITE = 'ADD_FAVORITE'
-export const REMOVE_FAVORITE = 'REMOVE_FAVORITE'
-export const CHANGE_BOARD = 'CHANGE_BOARD'
+export const QUEUE = 'QUEUE';
+export const PLAY = 'PLAY';
+export const STOPPED = 'STOPPED';
+export const TOGGLE_COLLECTION = 'TOGGLE_COLLECTION';
+export const TOGGLE_LOCAL_MODE = 'TOGGLE_LOCAL_MODE';
+export const SET_BOARD = 'SET_BOARD';
+export const ADD_FAVORITE = 'ADD_FAVORITE';
+export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
 
-export const COLLAPSED_COLLECTIONS_STORAGE_KEY = 'collapsedCollections'
-export const FAVORITES_STORAGE_KEY = 'favorites'
-export const LOCAL_MODE_STORAGE_KEY = 'localMode'
+export const COLLAPSED_COLLECTIONS_STORAGE_KEY = 'collapsedCollections';
+export const FAVORITES_STORAGE_KEY = 'favorites';
+export const LOCAL_MODE_STORAGE_KEY = 'localMode';
 
-export const SOUND_THROTTLE = 500
+export const SOUND_THROTTLE = 500;
 
 export const favoriteKeyIndex = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
   'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
   'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l',
   'z', 'x', 'c', 'v', 'b', 'n', 'm'
-]
+];
 
 export const keyCodeMap = {
   48: 0,
@@ -58,4 +57,4 @@ export const keyCodeMap = {
   88: 'x',
   89: 'y',
   90: 'z'
-}
+};

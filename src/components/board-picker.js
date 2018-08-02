@@ -1,53 +1,52 @@
-import React, { Component, PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import '../styles/board-picker.scss'
+import '../styles/board-picker.scss';
 
-const VALIDATION_ERROR = 'Invalid name, enter a minumum of 3 characters, only use: (a-z, 0-9 \'-\' or \'_\').'
+const VALIDATION_ERROR = 'Invalid name, enter a minumum of 3 characters, only use: (a-z, 0-9 \'-\' or \'_\').';
 
 class BoardPicker extends Component {
   constructor(...args) {
-    super(...args)
-    this.state = { input: '', error: '' }
+    super(...args);
+    this.state = { input: '', error: '' };
+    this.inputRef = React.createRef();
   }
 
   handleInput() {
-    const input = this.refs.input.value.toLowerCase()
-    const error = this.isValidBoardName(input) ? '' : this.state.error
+    const input = this.inputRef.current.value.toLowerCase();
+    const error = this.isValidboard(input) ? '' : this.state.error;
 
-    this.setState({ input, error })
+    this.setState({ input, error });
   }
 
   handleSubmit(e) {
-    const input = this.state.input
+    const input = this.state.input;
 
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!this.isValidBoardName(input)) {
-      this.setState({ error: VALIDATION_ERROR })
-      return
+    if (!this.isValidboard(input)) {
+      this.setState({ error: VALIDATION_ERROR });
+      return;
     }
 
-    this.props.push('/board/' + input)
+    this.props.history.push('/board/' + input);
   }
 
   handleLocalMode() {
-    this.props.push('/local')
+    this.props.history.push('/local');
   }
 
-  isValidBoardName(input) {
+  isValidboard(input) {
     return (
       input.length > 2 &&
       encodeURIComponent(input).indexOf('%') === -1
-    )
+    );
   }
 
   render() {
-    const { input, error } = this.state
+    const { input, error } = this.state;
 
-    const valid = this.isValidBoardName(input)
+    const valid = this.isValidboard(input);
     return (
       <div className="board-picker">
         <form className="board-picker__form" onSubmit={this.handleSubmit.bind(this)}>
@@ -55,7 +54,7 @@ class BoardPicker extends Component {
             className="board-picker__input"
             type="text"
             placeholder="Board name"
-            ref="input"
+            ref={this.inputRef}
             onInput={this.handleInput.bind(this)}
           />
           <button
@@ -82,15 +81,14 @@ class BoardPicker extends Component {
           Local mode
         </button>
       </div>
-    )
+    );
   }
 }
 
 BoardPicker.propTypes = {
-  push: PropTypes.func.isRequired
-}
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
+};
 
-export default connect(
-  () => ({}),
-  dispatch => bindActionCreators({ push }, dispatch)
-)(BoardPicker)
+export default BoardPicker;

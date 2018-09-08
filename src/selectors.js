@@ -4,8 +4,6 @@ export function getCollapsedCollections({ collections }) {
     .map(collection => collection.name);
 }
 
-export function isInLocalMode({ routing }) {
-  const location = routing ? routing.locationBeforeTransitions : null;
-  const pathname = location ? location.pathname : '';
-  return pathname.indexOf('/local') === 0;
+export function isInLocalMode() {
+  return window.location.pathname.indexOf('/local') === 0;
 }

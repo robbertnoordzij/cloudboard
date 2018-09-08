@@ -11,7 +11,7 @@ import { QUEUE, SOUND_THROTTLE } from '../constants';
 import { SERVER_PLAY } from '../../server/constants';
 import { play } from '../actions/sound-actions';
 import { serverQueue } from '../../server/events';
-import { isInLocalMode } from '../selectors';
+import { isInLocalMode } from '../helpers/routing';
 import { hasLocalStorage } from '../helpers/browser';
 import socket from '../socket';
 
@@ -29,7 +29,7 @@ export default function queueEpic(action$, { getState }) {
     })
     .map(action => ({
       action,
-      localMode: isInLocalMode(getState()),
+      localMode: isInLocalMode(),
       id: shortid.generate()
     }))
     .do(({ action, id, localMode }) => {

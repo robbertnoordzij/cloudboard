@@ -2280,5 +2280,19 @@
         "title": "Zo'n grote vuurbal jongu"
       }
     ]
+  },
+  {
+    "title": "Coolblue",
+    "name": "coolblue",
+    "sounds": [
+      {
+        "name": "sinterklaas-niet",
+        "title": "Ik ben toch zeker sinterklaas niet?!"
+      },
+      {
+        "name": "wat-orgineel",
+        "title": "Wat orgineeeeeel"
+      }
+    ]
   }
 ]

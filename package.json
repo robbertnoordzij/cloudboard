@@ -9,6 +9,7 @@
   "scripts": {
     "start": "node server",
     "serve": "concurrently 'nodemon server' 'npm:watch'",
+    "copy-static": "mkdir -p public; cp -r sounds public/",
     "watch": "NODE_ENV=development webpack",
     "build": "NODE_ENV=production webpack",
     "test": "eslint .",

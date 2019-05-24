@@ -8,7 +8,6 @@ const config = {
   entry: './src/main.js',
   output: {
     path: 'public',
-    publicPath: '/public',
     filename: 'bundle.js'
   },
   module: {

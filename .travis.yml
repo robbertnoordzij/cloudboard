@@ -6,11 +6,11 @@ script:
   - npm run build
   - echo $ADMIN_TOKEN > ADMIN_TOKEN
 deploy:
+  skip_cleanup: true
   - provider: heroku
     app: cloudboard-app
     api_key:
       secure: $HEROKU_API_KEY
   - provider: firebase
-    skip_cleanup: true
     api_key:
       secure: $FIREBASE_TOKEN

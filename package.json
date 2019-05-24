@@ -11,7 +11,7 @@
     "serve": "concurrently 'nodemon server' 'npm:watch'",
     "copy-static": "mkdir -p public; cp -r sounds public/",
     "watch": "NODE_ENV=development webpack",
-    "build": "NODE_ENV=production webpack",
+    "build": "npm run copy-static; NODE_ENV=production webpack",
     "test": "eslint .",
     "generate": "mkdir -p tools/output; rm -Rf tools/output/*; node ./tools/sound-generator.js"
   },

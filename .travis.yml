@@ -8,7 +8,6 @@ script:
 deploy:
   - provider: heroku
     app: cloudboard-app
-    skip_cleanup: true
     api_key:
       secure: $HEROKU_API_KEY
   - provider: firebase
